@@ -2,7 +2,7 @@ import { uploadPhoto, createUser } from './utils';
 
 export default function handleProfileSignup() {
   let string;
-  uploadPhoto()
+  return uploadPhoto()
     .then((result) => {
       string = `${result.body}`;
       return createUser();
