@@ -8,7 +8,7 @@ export default function cleanSet(set, startString) {
       result = result.concat(element.substring(startString.length), '-');
     }
   }
-  if (result.length > 1) {
+  if (result.length > 0) {
     result = result.substring(0, result.length - 1);
   }
   return result;
