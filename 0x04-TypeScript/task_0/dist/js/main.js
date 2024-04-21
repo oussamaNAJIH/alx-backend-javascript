@@ -11,18 +11,14 @@ var student2 = {
     location: "rabat"
 };
 var studentsList = [student1, student2];
-// Get the table element from the DOM
-var table = document.createElement('table');
-// Create header row
-var headerRow = document.createElement('tr');
-headerRow.innerHTML = '<th>First Name</th><th>Location</th>';
-table.appendChild(headerRow);
-// Create a row for each student and append to the table
+var myTable = document.createElement('table');
+var myHeader = document.createElement('tr');
+myHeader.innerHTML = '<th>First Name</th><th>Location</th>';
+myTable.appendChild(myHeader); // Append header to the table
 studentsList.forEach(function (student) {
-    var row = document.createElement('tr');
-    row.innerHTML = "<td>" + student.firstName + "</td><td>" + student.location + "</td>";
-    table.appendChild(row);
+    var myRow = document.createElement('tr');
+    myRow.innerHTML = "<td>".concat(student.firstName, "</td><td>").concat(student.location, "</td>");
+    myTable.appendChild(myRow);
 });
-// Append the table to the document body
-document.body.appendChild(table);
+document.body.appendChild(myTable);
 //# sourceMappingURL=main.js.map
