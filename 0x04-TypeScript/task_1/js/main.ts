@@ -22,4 +22,27 @@ const printTeacher: PrintTeacherFunction = (firstName: string, lastName: string)
     return `${firstLetter}. ${lastName}`;
 };
 
-console.log(printTeacher("John", "Doe"));
+
+interface StudentConstructor {
+    new (firstName: string, lastName: string): StudentClass;
+}
+
+interface StudentInterface {
+    workOnHomework(): string;
+    displayName(): string;
+}
+
+class StudentClass implements StudentInterface {
+    constructor(public firstName: string, public lastName: string) {}
+    
+    workOnHomework(): string {
+        return 'Currently working';
+    }
+    
+    displayName(): string {
+        return this.firstName;
+    }
+}
+
+export { StudentClass, StudentConstructor, StudentInterface };
+
