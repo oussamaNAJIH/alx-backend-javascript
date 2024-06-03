@@ -1,4 +1,4 @@
-process.stdout.write('Welcome to Holberton School, what is your name?');
+console.log('Welcome to Holberton School, what is your name?');
 
 process.stdin.on('readable', () => {
   const chunk = process.stdin.read();
