@@ -7,6 +7,7 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
     if (err) {
       reject(new Error('Cannot load the database'));
     } else if (data) {
+      let output = '';    
       const students = {};
       const courses = {};
       let length = 0;
@@ -32,7 +33,7 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
       }
       console.log(`Number of students: ${length}`);
       for (const [key, value] of Object.entries(courses)) {
-        console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
+        output = `Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`;
       }
       resolve(true);
     }
