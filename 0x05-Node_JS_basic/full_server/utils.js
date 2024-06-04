@@ -24,5 +24,3 @@ const readDatabase = (Path) => new Promise((resolve, reject) => {
     }
   });
 });
-
-module.exports = readDatabase;

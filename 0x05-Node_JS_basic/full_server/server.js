@@ -1,13 +1,11 @@
 const express = require('express');
-const routes = require('./routes/index');
-
+const router = require('./routes/index');
 const app = express();
-const port = 1245;
 
-// Use the routes defined in full_server/routes/index.js
-app.use('/', routes);
+app.use('/', router);
+app.use('/students', router);
+app.use('/students/:major', router);
 
-// Start the server on port 1245
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+app.listen(1245);
+
+export default app;
