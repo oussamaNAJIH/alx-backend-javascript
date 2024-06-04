@@ -16,7 +16,7 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
           const fields = lines[i].split(',');
           const course = fields[3];
           const firstName = fields[0];
-          if (students.hasOwnProperty(course)) {
+          if (Object.prototype.hasOwnProperty.call(students, course)) {
             students[course].push(firstName);
           } else {
             students[course] = [firstName];
