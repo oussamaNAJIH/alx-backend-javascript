@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs');
+
 const path = process.argv[2].toString();
 
 const countStudents = (Path) => new Promise((resolve, reject) => {
@@ -7,7 +8,7 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
     if (err) {
       reject(new Error('Cannot load the database'));
     } else if (data) {
-      let output = '';    
+      let output = '';
       const students = {};
       const courses = {};
       let length = 0;
@@ -41,29 +42,26 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
   });
 });
 
-
 const app = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    if (req.url === '/') {
-        res.end('Hello Holberton School!');
-    }
-    if (req.url === '/students') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.write('This is the list of our students\n');
-        // Call countStudents and handle the Promise
-        countStudents(path)
-            .then((output) => {
-                const outString = output.slice(0, -1);
-                res.end(outString);
-            })
-            .catch(() => {
-                response.statusCode = 404;
-                response.end('Cannot load the database');
-            });
-    }
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  if (req.url === '/') {
+    res.end('Hello Holberton School!');
+  }
+  if (req.url === '/students') {
+    res.write('This is the list of our students\n');
+    // Call countStudents and handle the Promise
+    countStudents(path)
+      .then((output) => {
+        const outString = output.slice(0, -1);
+        res.end(outString);
+      })
+      .catch(() => {
+        res.statusCode = 404;
+        res.end('Cannot load the database');
+      });
+  }
 });
 
 app.listen(1245);
 
 module.exports = app;
-
