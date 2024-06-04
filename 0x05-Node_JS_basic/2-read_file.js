@@ -1,33 +1,37 @@
 const fs = require('fs');
 
-function countStudents(path) {
+function countStudents(fileName) {
+  const students = {};
+  const fields = {};
+  let length = 0;
   try {
-    // find data
-    const data = fs.readFileSync(path, 'utf8');
-    const lines = data.split('\n');
-    const NUMBER_OF_STUDENTS = lines.length - 1;
-
-    const cs = { num: 0, students: [] };
-    const SWE = { num: 0, students: [] };
-
-    for (let i = 1; i < lines.length; i += 1) {
-      const fields = lines[i].split(',');
-      const name = fields[0];
-      const course = fields[3];
-
-      if (course === 'CS') {
-        cs.num += 1;
-        cs.students.push(name);
-      } else if (course === 'SWE') {
-        SWE.num += 1;
-        SWE.students.push(name);
+    const fileContents = fs.readFileSync(fileName, 'utf-8');
+    const lines = fileContents.toString().split('\n');
+    for (let i = 0; i < lines.length; i += 1) {
+      if (lines[i]) {
+        length += 1;
+        const field = lines[i].toString().split(',');
+        if (Object.prototype.hasOwnProperty.call(students, field[3])) {
+          students[field[3]].push(field[0]);
+        } else {
+          students[field[3]] = [field[0]];
+        }
+        if (Object.prototype.hasOwnProperty.call(fields, field[3])) {
+          fields[field[3]] += 1;
+        } else {
+          fields[field[3]] = 1;
+        }
       }
     }
-    console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
-    console.log(`Number of students in CS: ${cs.num}. List: ${cs.students.join(', ')}`);
-    console.log(`Number of students in SWE: ${SWE.num}. List: ${SWE.students.join(', ')}`);
-  } catch (err) {
-    throw new Error('Cannot load the database');
+    const l = length - 1;
+    console.log(`Number of students: ${l}`);
+    for (const [key, value] of Object.entries(fields)) {
+      if (key !== 'field') {
+        console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
+      }
+    }
+  } catch (error) {
+    throw Error('Cannot load the database');
   }
 }
 
