@@ -1,31 +1,32 @@
 const readDatabase = require('../utils');
 
 class StudentsController {
-  static getAllStudents(request, response) {
-    readDatabase(process.argv[2].toString()).then((students) => {
-      const output = [];
-      output.push('This is the list of our students');
-      const keys = Object.keys(students);
-      keys.sort();
-      for (let i = 0; i < keys.length; i += 1) {
-        output.push(`Number of students in ${keys[i]}: ${students[keys[i]].length}. List: ${students[keys[i]].join(', ')}`);
+  static getAllStudents(req, res) {
+    readDatabase(process.argv[2].toString()).then((data) => {
+      let result = 'This is the list of our students\n';
+      const fields = Object.keys(data).sort();
+
+      for (let i = 0; i < fields.length; i += 1) {
+        result += `Number of students in ${fields[i]}: ${data[fields[i]].length}. List: ${data[fields[i]].join(', ')}\n`;
       }
-      response.status(200).send(output.join('\n'));
+
+      res.status(200).send(result.trim());
     }).catch(() => {
-      response.status(500).send('Cannot load the database');
+      res.status(500).send('Cannot load the database');
     });
   }
 
-  static getAllStudentsByMajor(request, response) {
-    const field = request.params.major;
-    readDatabase(process.argv[2].toString()).then((students) => {
-      if (!(field in students)) {
-        response.status(500).send('Major parameter must be CS or SWE');
+  static getAllStudentsByMajor(req, res) {
+    const { major } = req.params;
+    readDatabase(process.argv[2].toString()).then((data) => {
+      if (!(major in data)) {
+        res.status(500).send('Major parameter must be CS or SWE');
       } else {
-        response.status(200).send(`List: ${students[field].join(', ')}`);
+        const result = `List: ${data[major].join(', ')}`;
+        res.status(200).send(result);
       }
     }).catch(() => {
-      response.status(500).send('Cannot load the database');
+      res.status(500).send('Cannot load the database');
     });
   }
 }
