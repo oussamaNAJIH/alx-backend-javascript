@@ -1,9 +1,15 @@
 const fs = require('fs');
 
 /**
+ * HTTP server that responds with "Hello Holberton School!" to any endpoint.
+ * @module 3-read_file_async
+ */
+
+/**
  * Counts the students in a CSV data file.
  * @param {String} path The path to the CSV data file.
  */
+
 const countStudents = (path) => new Promise((resolve, reject) => {
   fs.readFile(path, (err, data) => {
     if (err) {
