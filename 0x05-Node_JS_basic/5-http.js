@@ -37,7 +37,7 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
       for (const [key, value] of Object.entries(courses)) {
         output += `Number of students in ${key}: ${value}. List: ${students[key].join(', ')}\n`;
       }
-      resolve(true);
+      resolve(output);
     }
   });
 });
