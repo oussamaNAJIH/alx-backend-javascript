@@ -41,8 +41,8 @@ const countStudents = (Path) => new Promise((resolve, reject) => {
 
 
 const app = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
     if (req.url === '/') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Hello Holberton School!');
     }
     if (req.url === '/students') {
