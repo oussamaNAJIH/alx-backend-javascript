@@ -1,6 +1,6 @@
 const http = require('http');
 const countStudents = require('./3-read_file_async');
-const path = process.argv[2]; // Corrected argument index
+const path = process.argv[2].toString(); // Corrected argument index
 
 const app = http.createServer((req, res) => {
     if (req.url === '/') {
@@ -12,15 +12,13 @@ const app = http.createServer((req, res) => {
         res.write('This is the list of our students\n');
         // Call countStudents and handle the Promise
         countStudents(path)
-            .then(() => {
-                console.log('Database processed successfully.');
-                // At this point, the database processing is done
-                // You should send the response back to the client here
-                res.end(); // End the response
+            .then((output) => {
+                const outString = output.slice(0, -1);
+                res.end(outString);
             })
-            .catch((err) => {
-                console.error('Error processing database:', err.message);
-                res.end(); // End the response in case of error
+            .catch(() => {
+                response.statusCode = 404;
+                response.end('Cannot load the database');
             });
     }
 });
