@@ -10,12 +10,11 @@ const http = require('http');
  * @param {http.IncomingMessage} req The incoming HTTP request.
  * @param {http.ServerResponse} res The server response that will be sent back to the client.
  */
-const handleRequest = (req, res) => {
+
+const app = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('Hello Holberton School!');
-};
-
-const app = http.createServer(handleRequest);
+});
 
 app.listen(1245);
 
