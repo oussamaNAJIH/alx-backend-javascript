@@ -1,5 +1,5 @@
 const request = require('request');
-const { expect } = require('chai');
+const expect = require("chai").expect;
 
 describe('API Integration Testing', function() {
   it('should return the correct response for GET /', function(done) {
