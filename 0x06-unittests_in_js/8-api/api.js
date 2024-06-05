@@ -1,7 +1,7 @@
 const express = require('express');
 
 const app = express();
-app.get('/', (req, resp) => {
+app.get('/', (_, resp) => {
   resp.send('Welcome to the payment system');
 });
 

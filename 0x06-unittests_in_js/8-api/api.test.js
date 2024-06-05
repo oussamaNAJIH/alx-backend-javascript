@@ -1,20 +1,12 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('./api');
 
 describe('Index page', () => {
     it('should return status code 200', () => {
-        request(app)
-            .get('/')
-            .expect(200, done);
-    });
-
-    it('should return the correct message', (done) => {
-        request(app)
-            .get('/')
-            .end((err, res) => {
-                expect(res.text).to.equal('Welcome to the payment system');
-                done();
-            });
+        request.get('http://localhost:7865/', (_err, res, body) => {
+            expect(res.statusCode).to.be.equal(200);
+            expect(body).to.be.equal('Welcome to the payment system');
+            done();
+        })
     });
 });
