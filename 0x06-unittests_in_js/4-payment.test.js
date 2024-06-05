@@ -4,8 +4,8 @@ const { describe, it } = require("mocha");
 const Utils = require('./utils');
 const expect = require("chai").expect;
 
-describe("make sure the same math is used", function() {
-    it("checking the execution of calculateNumber once", function() {
+describe("checking the same math is used", function() {
+    it("staubing calculateNumber", function() {
         const consoleLogSpy = sinon.spy(console, "log");
         const calculateNumberStub = sinon.stub(Utils, "calculateNumber").returns(10);
         sendPaymentRequestToApi(100, 20);
