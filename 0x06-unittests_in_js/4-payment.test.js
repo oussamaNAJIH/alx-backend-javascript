@@ -11,7 +11,7 @@ describe("checking the same math is used", function() {
         sendPaymentRequestToApi(100, 20);
         
         expect(consoleLogSpy.calledOnce).to.be.true;
-        expect(consoleLogSpy.calledWithExactly("The total is: 120")).to.be.true;
+        expect(consoleLogSpy.calledWithExactly("The total is: 10")).to.be.true;
 
         expect(calculateNumberStub.calledOnce).to.be.true;
         expect(calculateNumberStub.calledWithExactly("SUM", 100, 20)).to.be.true;
