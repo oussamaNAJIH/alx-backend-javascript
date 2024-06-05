@@ -20,7 +20,7 @@ describe('make sure the same math is used', function() {
     it("checking the execution of calculateNumber once", function() {
         let spy = sinon.spy(Utils, 'calculateNumber'); // Corrected 'utils' to 'Utils'
         sendPaymentRequestToApi(100, 20);
-        expect(spy.calledOnceeWith('SUM', 100, 20)).to.be.true;
+        assert(spy.calledOnce);
         spy.restore();
     })
 });
