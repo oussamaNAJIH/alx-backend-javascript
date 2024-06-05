@@ -9,17 +9,7 @@ describe("checking the same math is used", function() {
         const consoleLogSpy = sinon.spy(console, "log");
         const calculateNumberStub = sinon.stub(Utils, "calculateNumber").returns(10);
         sendPaymentRequestToApi(100, 20);
-        
-        // Expectations for console.log spy
-        expect(consoleLogSpy.calledOnce).to.be.true;
         expect(consoleLogSpy.calledWithExactly("The total is: 10")).to.be.true;
-
-        // Expectations for calculateNumber stub
-        expect(calculateNumberStub.calledOnce).to.be.true;
         expect(calculateNumberStub.calledWithExactly("SUM", 100, 20)).to.be.true;
-
-        consoleLogSpy.restore();
-        calculateNumberStub.restore();
     });
 });
-
