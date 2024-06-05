@@ -2,7 +2,7 @@ const sinon = require("sinon");
 const sendPaymentRequestToApi = require('./3-payment');
 const {describe, it} = require("mocha");
 const Utils = require('./utils');
-const assert = require("assert");
+const expect = require("chai").expect;
 
 describe("make sure the same math is used", function() {
     it("checking the execution of calculateNumber once", function() {
