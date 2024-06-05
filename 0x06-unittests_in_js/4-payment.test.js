@@ -2,16 +2,20 @@ const sinon = require("sinon");
 const sendPaymentRequestToApi = require('./3-payment');
 const { describe, it } = require("mocha");
 const Utils = require('./utils');
+const expect = require("chai").expect;
 
-describe("make sure the same math is used", function() {
-    it("checking the execution of calculateNumber once", function() {
+describe("checking the same math is used", function() {
+    it("staubing calculateNumber", function() {
         const consoleLogSpy = sinon.spy(console, "log");
         const calculateNumberStub = sinon.stub(Utils, "calculateNumber").returns(10);
         sendPaymentRequestToApi(100, 20);
-        sinon.assert.calledOnce(consoleLogSpy);
-        sinon.assert.calledWithExactly(consoleLogSpy, "The total is: 10");
-        sinon.assert.calledOnce(calculateNumberStub);
-        sinon.assert.calledWithExactly(calculateNumberStub, "SUM", 100, 20);
+        
+        expect(consoleLogSpy.calledOnce).to.be.true;
+        expect(consoleLogSpy.calledWithExactly("The total is: 10")).to.be.true;
+
+        expect(calculateNumberStub.calledOnce).to.be.true;
+        expect(calculateNumberStub.calledWithExactly("SUM", 100, 20)).to.be.true;
+
         consoleLogSpy.restore();
         calculateNumberStub.restore();
     });
