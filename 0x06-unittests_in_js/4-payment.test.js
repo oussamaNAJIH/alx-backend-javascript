@@ -20,4 +20,3 @@ describe("checking the same math is used", function() {
         calculateNumberStub.restore();
     });
 });
-
